@@ -3,6 +3,7 @@
       <div v-if="notes.length">
         <note-template v-for="note in notes"
                        :note="note"
+                       :key="note.title"
         />
       </div>
       <div class="sidebar__content"
