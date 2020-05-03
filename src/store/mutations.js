@@ -15,5 +15,5 @@ export default {
   },
   [types.CLEAR_SAVE_TIMEOUT](state) {
     state.saveTimeout = null;
-  },
+  }
 };

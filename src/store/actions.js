@@ -6,6 +6,7 @@ export const saveNote = ({ commit, dispatch, state }) => {
     commit(mutation.SET_CURRENT_NOTE_ID, Date.now());
     commit(mutation.PREPERED_TO_NOTES, state.note);
   }
+  dispatch('storeNotes');
 };
 
 export const startSaveTimeout = ({ commit, dispatch, state }) => {
@@ -23,4 +24,8 @@ export const startSaveTimeout = ({ commit, dispatch, state }) => {
 
 export const stoptSaveTimeout = ({ commit, dispatch, state }) => {
 
+};
+
+export const storeNotes = ({ state }) => {
+  localStorage.setItem('notes', JSON.stringify(state.notes));
 };

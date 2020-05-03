@@ -11,7 +11,7 @@
                 placeholder="Start writing...."></textarea>
       <div class="pad__footer">
         <ul class="pad__footer-items">
-          <li  class="pad__footer-item">Words: x</li>
+          <li  class="pad__footer-item">Words: {{ wordCount }}</li>
           <li  class="pad__footer-item pad__footer-item_right">Last saved: {{ lastSaved }}</li>
         </ul>
       </div>
@@ -24,7 +24,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'padTemplate',
   computed: {
-    ...mapGetters(['note', 'lastSaved']),
+    ...mapGetters(['note', 'lastSaved', 'wordCount']),
   },
   methods: {
     ...mapActions(['saveNote', 'startSaveTimeout']),
