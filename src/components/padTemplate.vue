@@ -3,26 +3,37 @@
       <input type="text" class="pad__title"
              placeholder="Untitled note"
              v-model="note.title"
+             @keydown="save()"
       >
       <textarea class="pad__text"
                 v-model="note.body"
+                @keydown="save()"
                 placeholder="Start writing...."></textarea>
       <div class="pad__footer">
         <ul class="pad__footer-items">
           <li  class="pad__footer-item">Words: x</li>
-          <li  class="pad__footer-item pad__footer-item_right">Last saved: xx/xx</li>
+          <li  class="pad__footer-item pad__footer-item_right">Last saved: {{ lastSaved }}</li>
         </ul>
       </div>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'padTemplate',
   computed: {
-    ...mapGetters(['note']),
+    ...mapGetters(['note', 'lastSaved']),
+  },
+  methods: {
+    ...mapActions(['saveNote', 'startSaveTimeout']),
+    save() {
+      if (!this.note.id) {
+        this.saveNote();
+      }
+      this.startSaveTimeout();
+    },
   },
 };
 </script>

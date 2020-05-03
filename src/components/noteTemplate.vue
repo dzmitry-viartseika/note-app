@@ -4,11 +4,22 @@
         <span class="note__delete-icon">&times;</span>
       </a>
       <div class="note__content">
-        <a href="#" class="note__title">
-          {{ note.title }}
+        <a href="#" class="note__title"
+        >
+          <span            v-if="note.title">
+            {{ note.title }}
+          </span>
+          <span v-else>
+            Untitled note
+          </span>
         </a>
-        <p class="note__body">
+        <p class="note__body"
+           v-if="note.body"
+        >
           {{ note.body }}
+        </p>
+        <p v-else>
+         <em> Empty </em>
         </p>
       </div>
     </div>
