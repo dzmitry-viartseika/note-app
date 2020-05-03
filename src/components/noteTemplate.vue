@@ -1,10 +1,13 @@
 <template>
     <div class="note">
       <a href="#" class="note__delete">
-        <span class="note__delete-icon">&times;</span>
+        <span class="note__delete-icon"
+              @click="deleteNoteItem(note.id)"
+        >&times;</span>
       </a>
       <div class="note__content">
         <a href="#" class="note__title"
+           @click="openNote(note)"
         >
           <span            v-if="note.title">
             {{ note.title }}
@@ -26,12 +29,20 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'noteTemplate',
   props: {
     note: {
       type: Object,
       default: () => {},
+    },
+  },
+  methods: {
+    ...mapActions(['openNote', 'deleteNote']),
+    deleteNoteItem(id) {
+      this.deleteNote(id);
     },
   },
 };

@@ -11,12 +11,17 @@
       >
         Boo, no notes. Get writing!
       </div>
+      <div class="sidebar__content">
+        <a href="#"
+           @click="cleanCurrentNote()"
+        >Start a new note</a>
+      </div>
     </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import noteTemplate from './noteTemplate.vue';
-import { mapGetters } from 'vuex';
 
 export default {
   name: 'sideBarTemplate',
@@ -25,6 +30,9 @@ export default {
   },
   computed: {
     ...mapGetters(['notes']),
+  },
+  methods: {
+    ...mapActions(['cleanCurrentNote']),
   },
 };
 </script>

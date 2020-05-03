@@ -14,6 +14,24 @@ export default {
     state.saveTimeout = setTimeout(callback, delay);
   },
   [types.CLEAR_SAVE_TIMEOUT](state) {
+    clearInterval(state.saveTimeout);
     state.saveTimeout = null;
-  }
+  },
+  [types.SET_CURRENT_NOTE](state, note) {
+    if (note === null) {
+      state.note = {
+        id: null,
+        title: null,
+        body: null,
+        lastSaved: null,
+      };
+      return;
+    }
+    state.note = note;
+  },
+  [types.DELETE_NOTE](state, id) {
+    state.notes = state.notes.filter((item) => {
+      return item.id !== id;
+    });
+  },
 };

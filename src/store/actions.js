@@ -23,9 +23,26 @@ export const startSaveTimeout = ({ commit, dispatch, state }) => {
 };
 
 export const stoptSaveTimeout = ({ commit, dispatch, state }) => {
-
+  commit(mutation.CLEAR_SAVE_TIMEOUT);
 };
 
 export const storeNotes = ({ state }) => {
   localStorage.setItem('notes', JSON.stringify(state.notes));
+};
+
+export const deleteNote = ({ commit, dispatch, state }, id) => {
+  if (id === state.note.id) {
+    dispatch('cleanCurrentNote');
+  }
+  commit(mutation.DELETE_NOTE, id);
+  dispatch('storeNotes');
+};
+
+export const openNote = ({ commit }, note) => {
+  commit(mutation.SET_CURRENT_NOTE, note);
+};
+
+export const cleanCurrentNote = ({ commit, dispatch }) => {
+  dispatch('stoptSaveTimeout');
+  commit(mutation.SET_CURRENT_NOTE, null);
 };
